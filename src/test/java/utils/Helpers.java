@@ -23,4 +23,12 @@ public class Helpers {
         return (os.contains("win"));
 
     }
+
+    public static long giveMePostCode() {
+        long min = 1000000000; // Минимальное число для диапазона
+        long max = 9999999999L; // Максимальное число для диапазона
+
+        return (long) (Math.random() * ++max) + min;
+    }
+
 }

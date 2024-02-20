@@ -18,7 +18,6 @@ import java.util.List;
  * Тест кейс T2
  * Сортировка клиентов по имени (First Name)
  */
-
  public class SortingCustomersByFirstNameTest extends BaseCase {
     MainPage mainPage;
     Customers customersPage;
