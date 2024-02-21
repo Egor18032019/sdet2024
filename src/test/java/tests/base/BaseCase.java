@@ -6,8 +6,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.annotations.AfterSuite;
-import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.*;
 import utils.Const;
 import utils.Helpers;
 
@@ -29,9 +28,13 @@ public class BaseCase {
         System.out.println("Test start time:" + LocalTime.now());
     }
 
-    @BeforeSuite
+    @BeforeMethod
     @Step("Открытие браузера и переход на страницу")
     public void openURL() {
+        long id = Thread.currentThread().getId();
+        System.out.println("Before test-class. Thread id is:  " + id);
+
+
         System.setProperty("webdriver.http.factory", "jdk-http-client");
         if (Helpers.isWindows()) {
             System.setProperty("webdriver.chrome.driver", Const.pathWindowDriver);
@@ -52,15 +55,18 @@ public class BaseCase {
         driver.navigate().to(Const.urlMain);
     }
 
-    @AfterSuite
+    @AfterMethod
     @Step("Чистка кэша и закрытие браузера.")
     public void closeBrowser() {
         JavascriptExecutor javascriptExecutor = (JavascriptExecutor) driver;
         javascriptExecutor.executeScript("window.sessionStorage.clear()");
         driver.manage().deleteAllCookies();
         driver.quit();
+
         System.out.println( "Test end time:" + LocalTime.now());
+
+        long id = Thread.currentThread().getId();
+        System.out.println("After test-class. Thread id is: "+ id);
+    }
     }
 
-
-}

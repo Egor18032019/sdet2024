@@ -28,11 +28,11 @@ public class SortingCustomersByFirstNameTest extends BaseCase {
     @Issue("T2")
     @Description("Сортировка клиентов по имени (First Name)")
     public void sortingCustomersByFirstNameTest() {
-        mainPage = new MainPage(driver);
+        mainPage = new MainPage(driver,webDriverWait);
         Waiters.waitVisibilityElement(mainPage.customersButton, webDriverWait);
         mainPage.clickButtonCustomer();
 
-        customersPage = new Customers(driver);
+        customersPage = new Customers(driver,webDriverWait);
         Waiters.waitVisibilityElement(customersPage.table, webDriverWait);
 
         List<WebElement> listRowBeforeClickOnFirstName = customersPage.rowsFromTableCustomer;

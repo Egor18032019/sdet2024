@@ -16,8 +16,8 @@ import java.util.List;
 public class Customers extends MainPage {
 
 
-    public Customers(WebDriver driver) {
-        super(driver);
+    public Customers(WebDriver driver , WebDriverWait webDriverWait) {
+        super(driver,webDriverWait);
     }
 
     /**
@@ -28,7 +28,7 @@ public class Customers extends MainPage {
     /**
      * Строка таблицы из вкладки Customer
      */
-    @FindBy(css = ".ng-binding")
+    @FindBy(xpath = "//tr[@class='ng-scope']")
     public WebElement row;
     /**
      * Поле для текстового вода используемая для поиска клиента
@@ -57,8 +57,8 @@ public class Customers extends MainPage {
     }
 
     @Step("Поиск клиентов содержащих в ФИО {searchString}")
-    public List<WebElement> searchCustomer(String searchString, WebDriverWait wait) {
-        Waiters.waitVisibilityElement(searchCustomerInput, wait);
+    public List<WebElement> searchCustomer(String searchString, WebDriverWait waitD) {
+        Waiters.waitVisibilityElement(searchCustomerInput, waitD);
         searchCustomer(searchString);
         return rowsFromTableCustomer;
     }

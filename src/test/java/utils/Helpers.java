@@ -24,17 +24,18 @@ public class Helpers {
 
     }
 
+    @Step("Генерация Post code")
     public static long giveMePostCode() {
         long min = 1000000000; // Минимальное число для диапазона
         long max = 9999999999L; // Максимальное число для диапазона
-
-        return (long) (Math.random() * ++max) + min;
+        long generatedLong = max + (long) (Math.random() * (min - max));
+        return generatedLong;
     }
 
+    @Step("Генерация First name из Post code")
     public static String giveMeFirstName(long number) {
         String line = String.valueOf(number);
         StringBuilder str = new StringBuilder();
-
         for (int i = 0; i < line.length(); i = i + 2) {
             int foo = Integer.parseInt(line.substring(i, i + 2));
             String bar = giveMeLetterFromNumber(foo);

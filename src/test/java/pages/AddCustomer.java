@@ -11,8 +11,8 @@ import utils.Waiters;
 
 public class AddCustomer extends MainPage {
 
-    public AddCustomer(WebDriver driver) {
-        super(driver);
+    public AddCustomer(WebDriver driver,WebDriverWait webDriverWait) {
+        super(driver,webDriverWait);
     }
 
     /**

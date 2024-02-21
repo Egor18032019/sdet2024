@@ -24,11 +24,11 @@ public class AddCustomerTest extends BaseCase {
     @Test
     @Description("Создание клиента (Customer)")
     public void creatingCustomerTest() {
-        mainPage = new MainPage(driver);
+        mainPage = new MainPage(driver,webDriverWait);
+
         Waiters.waitVisibilityElement(mainPage.addCustomerButton, webDriverWait);
         mainPage.clickButtonAddCustomer();
-        addCustomer = new AddCustomer(driver);
-        System.out.println(giveMePostCode());
+        addCustomer = new AddCustomer(driver,webDriverWait);
         long postalCode = giveMePostCode();
         String firstName = giveMeFirstName(postalCode);
         String postalCodeForString = String.valueOf(postalCode);
