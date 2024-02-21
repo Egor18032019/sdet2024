@@ -1,12 +1,14 @@
 package tests;
 
 import io.qameta.allure.Description;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.AddCustomer;
 import pages.MainPage;
 import utils.Const;
 import utils.Waiters;
 
+import static utils.Helpers.giveMeFirstName;
 import static utils.Helpers.giveMePostCode;
 
 
@@ -27,9 +29,10 @@ public class AddCustomerTest extends BaseCase {
         addCustomer = new AddCustomer(driver);
         System.out.println(giveMePostCode());
         long postalCode = giveMePostCode();
-
+        String firstName = giveMeFirstName(postalCode);
+        String postalCodeForString = String.valueOf(postalCode);
         Waiters.waitVisibilityElement(addCustomer.createAccountButton, webDriverWait);
-
-        addCustomer.creatingCustomer(Const.firstName, Const.lastName, Const.postalCode, driver, webDriverWait);
+        boolean added = addCustomer.creatingCustomer(firstName, Const.lastName, postalCodeForString, driver, webDriverWait);
+        Assert.assertTrue(added, "New customer not added");
     }
 }

@@ -51,7 +51,7 @@ public class AddCustomer extends MainPage {
     }
 
     @Step("Создание нового клиента +  accept модального окна")
-    public void creatingCustomer(String name, String last, String postalCode, WebDriver driver, WebDriverWait wait) {
+    public boolean creatingCustomer(String name, String last, String postalCode, WebDriver driver, WebDriverWait wait) {
         Waiters.waitVisibilityElement(firstNameInput, wait);
         Waiters.waitVisibilityElement(lastNameInput, wait);
         Waiters.waitVisibilityElement(postalCodeInput, wait);
@@ -59,9 +59,9 @@ public class AddCustomer extends MainPage {
         Waiters.WaitingModalWindow(wait);
         Alert alert = driver.switchTo().alert();
         String textOnAlert = alert.getText();
-        boolean iaAdded = textOnAlert.startsWith(Const.expectedTextAfterCreatNewCustomer);
-
+        boolean added = textOnAlert.startsWith(Const.expectedTextAfterCreatNewCustomer);
         alert.accept();
+        return added;
     }
 
 }

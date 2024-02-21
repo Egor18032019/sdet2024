@@ -37,15 +37,17 @@ public class BaseCase {
             System.setProperty("webdriver.chrome.driver", Const.pathWindowDriver);
         }
         ChromeOptions options = new ChromeOptions();
-//        options.addArguments("--headless");
+        options.addArguments("--headless");
         options.addArguments("start-maximized");
         options.setExperimentalOption("excludeSwitches", Collections.singletonList("enable-automation"));
         options.setExperimentalOption("useAutomationExtension", false);
         options.addArguments("--no-sandbox");
         options.addArguments("--disable-dev-shm-usage");
+        options.addArguments("--disable-gpu");
         driver = new ChromeDriver(options);
 //        driver.manage().window().setSize(new Dimension( Const.width,  Const.height));
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(1));
+        driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(3));
         webDriverWait = new WebDriverWait(driver, Duration.ofSeconds(1));
         driver.navigate().to(Const.urlMain);
     }

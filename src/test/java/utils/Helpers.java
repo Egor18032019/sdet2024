@@ -31,4 +31,24 @@ public class Helpers {
         return (long) (Math.random() * ++max) + min;
     }
 
+    public static String giveMeFirstName(long number) {
+        String line = String.valueOf(number);
+        StringBuilder str = new StringBuilder();
+
+        for (int i = 0; i < line.length(); i = i + 2) {
+            int foo = Integer.parseInt(line.substring(i, i + 2));
+            String bar = giveMeLetterFromNumber(foo);
+            str.append(bar);
+        }
+
+        return str.toString();
+    }
+
+    protected static String giveMeLetterFromNumber(int digit) {
+        String alphabet = "abcdefghijklmnopqrstuvwxyz";
+        int rightIndex = digit % 25;
+        String answer = String.valueOf(alphabet.charAt(rightIndex));
+        return answer;
+
+    }
 }
