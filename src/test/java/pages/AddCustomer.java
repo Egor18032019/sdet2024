@@ -50,7 +50,7 @@ public class AddCustomer extends MainPage {
         return alert.getText();
     }
 
-    @Step("Создание нового клиента +  accept модального окна")
+    @Step("Создание нового клиента +  accept модального окна + проверка на создание")
     public boolean creatingCustomer(String name, String last, String postalCode, WebDriver driver, WebDriverWait wait) {
         Waiters.waitVisibilityElement(firstNameInput, wait);
         Waiters.waitVisibilityElement(lastNameInput, wait);

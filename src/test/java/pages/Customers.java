@@ -52,7 +52,7 @@ public class Customers extends MainPage {
     }
 
     @Step("Сортировка таблицы при нажатие на First name")
-    public void sortForFirstName() {
+    public void clickOnButtonForSortForFirstName() {
         clickButton(sortLinkFirsName);
     }
 

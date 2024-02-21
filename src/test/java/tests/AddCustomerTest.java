@@ -5,6 +5,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.AddCustomer;
 import pages.MainPage;
+import tests.base.BaseCase;
 import utils.Const;
 import utils.Waiters;
 
