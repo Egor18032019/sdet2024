@@ -6,10 +6,10 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 /**
- * методы для явного ожидания
+ * Методы для явного ожидания
  */
 public class Waiters {
-    @Step("Ожидание появления элемента")
+    @Step("Ожидание появления элемента ")
     public static void waitVisibilityElement(WebElement element, WebDriverWait wait) {
         wait.until(ExpectedConditions.visibilityOf(element));
     }

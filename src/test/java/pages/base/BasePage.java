@@ -1,5 +1,6 @@
 package pages.base;
 
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
@@ -34,5 +35,10 @@ public class BasePage {
      */
     public static void setTextElementText(WebElement textElement, String value) {
         textElement.sendKeys(value);
+    }
+
+    public static  void scrollWithJavaScript(WebElement element,WebDriver webDriver) {
+        String mouseOverScript = "if(document.createEvent){var evObj = document.createEvent('MouseEvents');evObj.initEvent('mouseover', true, false); arguments[0].dispatchEvent(evObj);} else if(document.createEventObject) { arguments[0].fireEvent('onmouseover');}";
+        ((JavascriptExecutor) webDriver).executeScript(mouseOverScript, element);
     }
 }

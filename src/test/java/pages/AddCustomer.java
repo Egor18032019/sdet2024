@@ -59,7 +59,7 @@ public class AddCustomer extends MainPage {
         Waiters.WaitingModalWindow(wait);
         Alert alert = driver.switchTo().alert();
         String textOnAlert = alert.getText();
-        boolean added = textOnAlert.startsWith(Const.expectedTextAfterCreatNewCustomer);
+        boolean added = textOnAlert.startsWith(Const.expectedTextAfterCreateNewCustomer);
         alert.accept();
         return added;
     }

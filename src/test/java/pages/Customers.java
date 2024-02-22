@@ -15,7 +15,6 @@ import java.util.List;
  */
 public class Customers extends MainPage {
 
-
     public Customers(WebDriver driver , WebDriverWait webDriverWait) {
         super(driver,webDriverWait);
     }

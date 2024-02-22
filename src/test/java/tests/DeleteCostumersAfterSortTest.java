@@ -16,6 +16,8 @@ import utils.Waiters;
 import java.util.Comparator;
 import java.util.List;
 
+import static pages.base.BasePage.scrollWithJavaScript;
+
 public class DeleteCostumersAfterSortTest extends BaseCase {
 
     MainPage mainPage;
@@ -23,27 +25,27 @@ public class DeleteCostumersAfterSortTest extends BaseCase {
 
     @Test
     @Issue("T3")
-    @Description("Удаление клиента после сортировки")
-    public void sortingCustomersByFirstNameTest() throws InterruptedException {
-        mainPage = new MainPage(driver,webDriverWait);
+    @Description("Удаление клиента после поиска  ")
+    public void deleteCustomersByFirstNameAfterSearch() {
+        mainPage = new MainPage(driver, webDriverWait);
         Waiters.waitVisibilityElement(mainPage.customersButton, webDriverWait);
         mainPage.clickButtonCustomer();
 
-        customersPage = new Customers(driver,webDriverWait);
+        customersPage = new Customers(driver, webDriverWait);
         Waiters.waitVisibilityElement(customersPage.table, webDriverWait);
         List<WebElement> listAllNames = customersPage.rowsFromTableCustomer;
 
         if (listAllNames.isEmpty()) {
             Assert.fail("Пустой список клиентов после перехода на вкладку Customers");
         }
-        //todo написать отдельную функцию на сортировку ? билдер ?
+
         List<String> sortNameCustomers =
                 listAllNames.stream()
                         .map(o -> o.getText().split(" ")[0])
                         .sorted(Comparator.comparing(String::length))
                         .toList();
         String customerForDelete = giveMeAverageName(sortNameCustomers);
-//todo два теста. Один с поиском второй нет
+
         customersPage.searchCustomer(customerForDelete);
 
         List<WebElement> listAllNamesAfterSearchAndAfterFilter = checkListAfterFilterByName(customerForDelete);
@@ -57,6 +59,42 @@ public class DeleteCostumersAfterSortTest extends BaseCase {
 
 
         boolean delete = checkListAfterFilterByName(customerForDelete).isEmpty();
+        Assert.assertTrue(delete, "Удаление не прошло.");
+    }
+
+
+    @Test
+    @Issue("T3.1")
+    @Description("Удаление клиента в ручную  ")
+    public void sortingCustomersByFirstNameTest() {
+        mainPage = new MainPage(driver, webDriverWait);
+        Waiters.waitVisibilityElement(mainPage.customersButton, webDriverWait);
+        mainPage.clickButtonCustomer();
+
+        customersPage = new Customers(driver, webDriverWait);
+        Waiters.waitVisibilityElement(customersPage.table, webDriverWait);
+        List<WebElement> listAllNames = customersPage.rowsFromTableCustomer;
+
+        if (listAllNames.isEmpty()) {
+            Assert.fail("Пустой список клиентов после перехода на вкладку Customers");
+        }
+
+        List<String> sortNameCustomers =
+                listAllNames.stream()
+                        .map(o -> o.getText().split(" ")[0])
+                        .sorted(Comparator.comparing(String::length))
+                        .toList();
+        String customerNameForDelete = giveMeAverageName(sortNameCustomers);
+
+//получили
+        WebElement elementForDelete = checkListAfterFilterByName(customerNameForDelete).get(0);
+        //прокрутили
+        scrollWithJavaScript(elementForDelete, driver);
+        //нашли кнопку
+        List<WebElement> deleteButton = elementForDelete.findElements(By.tagName("button"));
+        // удалили
+        BasePage.clickButton(deleteButton.get(0));
+        boolean delete = checkListAfterFilterByName(customerNameForDelete).isEmpty();
         Assert.assertTrue(delete, "Удаление не прошло.");
     }
 
