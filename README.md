@@ -26,7 +26,9 @@ allure serve
 https://www.jenkins.io/doc/book/installing/docker/
 sudo docker exec 729fdae57703 cat /var/jenkins_home/secrets/initialAdminPassword 
 0 docker network create jenkins
-
+```shell
+docker network create jenkins
+```
 1 docker run \
 --name jenkins-docker \
 --rm \
@@ -41,7 +43,11 @@ sudo docker exec 729fdae57703 cat /var/jenkins_home/secrets/initialAdminPassword
 docker:dind \
 --storage-driver overlay2
 
-2 docker build -t myjenkins-blueocean:2.440.1-1 .
+2 
+```shell
+docker build -t myjenkins-blueocean:2.440.1-1 .
+```
+
 3 docker run \
 --name jenkins-blueocean \
 --restart=on-failure \
