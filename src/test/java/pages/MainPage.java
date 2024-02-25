@@ -19,12 +19,12 @@ public class MainPage extends BasePage {
     /**
      * Кнопка <Add Customer>
      */
-    @FindBy(xpath = "//button[contains(text(),'Add Customer')]")
+    @FindBy(xpath = "//button[@ng-class='btnClass1']")
     public WebElement addCustomerButton;
     /**
      * Кнопка <Open Account>
      */
-    @FindBy(xpath = "//button[contains(text(),'Open Account')]")
+    @FindBy(xpath = "//button[@ng-class='btnClass2']")
     public WebElement openAccountButton;
     /**
      * Кнопка <Customers>
@@ -46,5 +46,4 @@ public class MainPage extends BasePage {
     public void clickButtonCustomer() {
         clickButton(customersButton);
     }
-
 }

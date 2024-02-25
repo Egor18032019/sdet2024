@@ -6,13 +6,12 @@ import io.qameta.allure.Issue;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import pages.Customers;
+import pages.CustomersPage;
 import pages.MainPage;
 
 import tests.base.BaseCase;
 import utils.Waiters;
 
-import java.util.Comparator;
 import java.util.List;
 
 
@@ -22,31 +21,21 @@ import java.util.List;
  */
 public class SortingCustomersByFirstNameTest extends BaseCase {
     MainPage mainPage;
-    Customers customersPage;
+    CustomersPage customersPage;
 
     @Test
     @Issue("T2")
     @Description("Сортировка клиентов по имени (First Name)")
     public void sortingCustomersByFirstNameTest() {
-        mainPage = new MainPage(driver,webDriverWait);
+        mainPage = new MainPage(driver, webDriverWait);
         Waiters.waitVisibilityElement(mainPage.customersButton, webDriverWait);
         mainPage.clickButtonCustomer();
 
-        customersPage = new Customers(driver,webDriverWait);
+        customersPage = new CustomersPage(driver, webDriverWait);
         Waiters.waitVisibilityElement(customersPage.table, webDriverWait);
 
-        List<WebElement> listRowBeforeClickOnFirstName = customersPage.rowsFromTableCustomer;
-        int sizeList = listRowBeforeClickOnFirstName.size();
-        if (sizeList == 0) {
-            Assert.fail("Пустой список клиентов после перехода на вкладку Customers");
-        }
-        listRowBeforeClickOnFirstName.sort(Comparator.comparing(o -> o.getText().split(" ")[0]));
-
-        customersPage.clickOnButtonForSortForFirstName();
-
-        // Ждем именно когда появится строка. Таблица уже есть
-        Waiters.waitVisibilityElement(customersPage.row, webDriverWait);
-        List<WebElement> listRowSortedAfterClickOnFirstName = customersPage.rowsFromTableCustomer;
+        List<WebElement> listRowBeforeClickOnFirstName = customersPage.sortCustomerFromPageOnList();
+        var listRowSortedAfterClickOnFirstName = customersPage.clickOnButtonForSortForFirstName(webDriverWait);
 
         boolean isSorted = listRowSortedAfterClickOnFirstName.equals(listRowBeforeClickOnFirstName);
         Assert.assertTrue(isSorted, "Сортировка списка клиентов не соответствует ожиданием ");

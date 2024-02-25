@@ -23,7 +23,6 @@ public class BaseCase {
     public WebDriver driver;
     public WebDriverWait webDriverWait;
 
-
     static {
         System.out.println("Test start time:" + LocalTime.now());
     }
@@ -33,14 +32,12 @@ public class BaseCase {
     public void openURL() {
         long id = Thread.currentThread().getId();
         System.out.println("Before test-class. Thread id is:  " + id);
-
-
         System.setProperty("webdriver.http.factory", "jdk-http-client");
         if (Helpers.isWindows()) {
             System.setProperty("webdriver.chrome.driver", Const.pathWindowDriver);
         }
         ChromeOptions options = new ChromeOptions();
-        options.addArguments("--headless");
+//        options.addArguments("--headless");
         options.addArguments("start-maximized");
         options.setExperimentalOption("excludeSwitches", Collections.singletonList("enable-automation"));
         options.setExperimentalOption("useAutomationExtension", false);

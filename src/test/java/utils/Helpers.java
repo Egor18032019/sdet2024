@@ -3,6 +3,7 @@ package utils;
 import io.qameta.allure.Step;
 import org.openqa.selenium.WebElement;
 
+import java.util.Comparator;
 import java.util.List;
 
 public class Helpers {
@@ -21,7 +22,6 @@ public class Helpers {
     public static boolean isWindows() {
         String os = System.getProperty("os.name").toLowerCase();
         return (os.contains("win"));
-
     }
 
     @Step("Генерация Post code")
@@ -47,9 +47,21 @@ public class Helpers {
 
     protected static String giveMeLetterFromNumber(int digit) {
         String alphabet = "abcdefghijklmnopqrstuvwxyz";
-        int rightIndex = digit % 25;
+        int rightIndex = digit % 26;
         String answer = String.valueOf(alphabet.charAt(rightIndex));
         return answer;
-
     }
+
+    @Step("Получение имени пользователя близкое к среднеарифметическому.")
+    public static String giveMeAverageName(List<WebElement> listAllNames) {
+
+        List<String> sortNameCustomers =
+                listAllNames.stream()
+                        .map(o -> o.getText().split(" ")[0])
+                        .sorted(Comparator.comparing(String::length))
+                        .toList();
+        int length = sortNameCustomers.size();
+        return sortNameCustomers.get(length / 2);
+    }
+
 }

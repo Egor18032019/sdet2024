@@ -3,14 +3,11 @@ package tests;
 import io.qameta.allure.Description;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import pages.AddCustomer;
+import pages.AddCustomerPage;
 import pages.MainPage;
 import tests.base.BaseCase;
 import utils.Const;
 import utils.Waiters;
-
-import static utils.Helpers.giveMeFirstName;
-import static utils.Helpers.giveMePostCode;
 
 
 /**
@@ -19,21 +16,20 @@ import static utils.Helpers.giveMePostCode;
  */
 public class AddCustomerTest extends BaseCase {
     MainPage mainPage;
-    AddCustomer addCustomer;
+    AddCustomerPage addCustomerPage;
 
     @Test
     @Description("Создание клиента (Customer)")
     public void creatingCustomerTest() {
-        mainPage = new MainPage(driver,webDriverWait);
-
+        mainPage = new MainPage(driver, webDriverWait);
         Waiters.waitVisibilityElement(mainPage.addCustomerButton, webDriverWait);
         mainPage.clickButtonAddCustomer();
-        addCustomer = new AddCustomer(driver,webDriverWait);
-        long postalCode = giveMePostCode();
-        String firstName = giveMeFirstName(postalCode);
-        String postalCodeForString = String.valueOf(postalCode);
-        Waiters.waitVisibilityElement(addCustomer.createAccountButton, webDriverWait);
-        boolean added = addCustomer.creatingCustomer(firstName, Const.lastName, postalCodeForString, driver, webDriverWait);
+        addCustomerPage = new AddCustomerPage(driver, webDriverWait);
+
+        Waiters.waitVisibilityElement(addCustomerPage.createAccountButton, webDriverWait);
+        boolean added = addCustomerPage.creatingCustomer(Const.lastName, driver, webDriverWait);
         Assert.assertTrue(added, "New customer not added");
     }
+
+
 }
