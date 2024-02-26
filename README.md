@@ -24,7 +24,8 @@ allure serve
 ```
 Установка Jenkinsa локально
 https://www.jenkins.io/doc/book/installing/docker/
-sudo docker exec 729fdae57703 cat /var/jenkins_home/secrets/initialAdminPassword 
+sudo docker exec c638008edc94 cat /var/jenkins_home/secrets/initialAdminPassword 
+sudo docker exec -it c638008edc94 bash 
 0 docker network create jenkins
 ```shell
 docker network create jenkins
