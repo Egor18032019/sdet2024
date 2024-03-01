@@ -51,7 +51,6 @@ public class ApiRequestsTest {
         boolean isEqualsEntity = Steps.isEquals(request, response);
 
         Assert.assertTrue(isEqualsEntity, "Сервер вернул измененный предварительно записанный запрос.");
-        // и удалили то что записывали
         idForDelete = id;
     }
 
@@ -63,7 +62,6 @@ public class ApiRequestsTest {
         String responseID = Steps.postEntityRequest(request);
         Integer id = Integer.valueOf(responseID);
         EntityResponseArray entityResponseArray = Steps.getAllEntityRequest();
-
         List<EntityResponse> entityResponseList = Arrays.stream(entityResponseArray.getEntity())
                 .filter(
                         o -> o.getId().equals(id)
@@ -72,7 +70,6 @@ public class ApiRequestsTest {
         boolean isOneElement = entityResponseList.size() == 1;
 
         Assert.assertTrue(isOneElement, "В списке не содержится предварительно записанная сущность.");
-        // и удалили то что записывали
         idForDelete = responseID;
     }
 
@@ -82,9 +79,10 @@ public class ApiRequestsTest {
     public void postOneFromApi() {
         EntityRequest request = Steps.createEntityRequest();
         String responseID = Steps.postEntityRequest(request);
+        EntityResponse entityFromServer = Steps.getEntityRequest(EndPoint.get + decimetre + responseID);
+        boolean isUpdate = Steps.isEquals(request,entityFromServer);
 
-        Assert.assertNotNull(responseID, "что то пошло не так");
-        // и удалили то что записывали
+        Assert.assertTrue(isUpdate, "Отправленное на сервер не равно пришедшему с сервера.");
         idForDelete = responseID;
     }
 
@@ -97,7 +95,6 @@ public class ApiRequestsTest {
         String response = Steps.deleteEntityOnServer(EndPoint.delete + decimetre + id);
 
         Assert.assertNotNull(response, "что то пошло не так");
-        // и удалили то что записывали
         idForDelete = id;
     }
 
@@ -113,7 +110,6 @@ public class ApiRequestsTest {
         boolean isUpdate = Steps.isEquals(requestForUpdateBeforeWriteOnServer, entityAfterUpdateFromServer);
 
         Assert.assertTrue(isUpdate);
-        // и удалили то что записывали
         idForDelete = id;
     }
 }
