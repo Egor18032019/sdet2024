@@ -3,11 +3,11 @@ package tests.base;
 import io.qameta.allure.Step;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.annotations.*;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
 import utils.Const;
 import utils.Helpers;
 
@@ -49,7 +49,7 @@ public class BaseCase {
         options.addArguments("--disable-gpu");
         WebDriver driver = null;
         try {
-            driver = new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"), options);
+            driver = new RemoteWebDriver(new URL("http://localhost:2376/wd/hub"), options);
         } catch (MalformedURLException e) {
             System.out.println("не смогла ");
         }
