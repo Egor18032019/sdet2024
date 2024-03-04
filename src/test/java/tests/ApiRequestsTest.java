@@ -22,6 +22,8 @@ public class ApiRequestsTest {
 
     @AfterMethod
     public void afterMethod(ITestResult result, ITestContext context) {
+        long id = Thread.currentThread().getId();
+        System.out.println("Before test-class. Thread id is:  " + id);
         if (idForDelete == null) return;
         if (!result.getMethod().getMethodName().equalsIgnoreCase("deleteOneFromApi")) {
             Steps.deleteEntityOnServer(EndPoint.delete + decimetre + idForDelete);
@@ -45,6 +47,8 @@ public class ApiRequestsTest {
     @Description("Тест на /api/get/")
     @Epic(value = "GET")
     public void getOneFromApi() {
+        long ids = Thread.currentThread().getId();
+        System.out.println("Before test-class. Thread id is:  " + ids);
         EntityRequest request = Steps.createEntityRequest();
         String id = Steps.postEntityRequest(request);
         EntityResponse response = Steps.getEntityRequest(EndPoint.get + decimetre + id);
@@ -58,6 +62,8 @@ public class ApiRequestsTest {
     @Description("Тест на GET по /api/getAll")
     @Epic(value = "GET")
     public void getAllFromApi() {
+        long ids = Thread.currentThread().getId();
+        System.out.println("Before test-class. Thread id is:  " + ids);
         EntityRequest request = Steps.createEntityRequest();
         String responseID = Steps.postEntityRequest(request);
         Integer id = Integer.valueOf(responseID);
@@ -77,6 +83,8 @@ public class ApiRequestsTest {
     @Description("Тест на POST по /api/create")
     @Epic(value = "POST")
     public void postOneFromApi() {
+        long id = Thread.currentThread().getId();
+        System.out.println("Before test-class. Thread id is:  " + id);
         EntityRequest request = Steps.createEntityRequest();
         String responseID = Steps.postEntityRequest(request);
         EntityResponse entityFromServer = Steps.getEntityRequest(EndPoint.get + decimetre + responseID);
@@ -90,6 +98,8 @@ public class ApiRequestsTest {
     @Description("Тест на DELETE по /api/delete")
     @Epic(value = "DELETE")
     public void deleteOneFromApi() {
+        long ids = Thread.currentThread().getId();
+        System.out.println("Before test-class. Thread id is:  " + ids);
         EntityRequest request = Steps.createEntityRequest();
         String id = Steps.postEntityRequest(request);
         String response = Steps.deleteEntityOnServer(EndPoint.delete + decimetre + id);
@@ -102,6 +112,8 @@ public class ApiRequestsTest {
     @Description("Тест на PATCH по /api/patch")
     @Epic(value = "PATCH")
     public void patchOneFromApi() {
+        long ids = Thread.currentThread().getId();
+        System.out.println("Before test-class. Thread id is:  " + ids);
         EntityRequest request = Steps.createEntityRequest();
         String id = Steps.postEntityRequest(request);
         EntityRequest requestForUpdateBeforeWriteOnServer = Steps.createEntityRequest();

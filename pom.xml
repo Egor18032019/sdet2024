@@ -107,6 +107,14 @@
                             src/test/java/testngApi.xml
                         </suiteXmlFile>
                     </suiteXmlFiles>
+                    <properties>
+                    <property>
+                        <name>parallel</name>
+                        <value>methods</value>
+                        <forkCount>2</forkCount>
+                        <reuseForks>false</reuseForks>
+                    </property>
+                    </properties>
                 </configuration>
                 <dependencies>
                     <dependency>
