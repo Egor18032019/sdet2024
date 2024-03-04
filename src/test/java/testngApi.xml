@@ -1,0 +1,10 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="All tests" parallel="methods" thread-count="3">
+    <test name="Parallel-methods test" group-by-instances="true" parallel = "methods">
+        <classes>
+            <class name="tests.ApiRequestsTest">
+
+            </class>
+        </classes>
+    </test>
+</suite>
