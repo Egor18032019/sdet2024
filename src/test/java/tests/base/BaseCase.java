@@ -49,7 +49,7 @@ public class BaseCase {
         options.addArguments("--disable-gpu");
         WebDriver driver = null;
         try {
-            driver = new RemoteWebDriver(new URL("http://localhost:50000/wd/hub"), options);
+            driver = new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"), options);
         } catch (MalformedURLException e) {
             System.out.println("не смогла ");
         }
