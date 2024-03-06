@@ -37,7 +37,7 @@ public class BaseCase {
             System.setProperty("webdriver.chrome.driver", Const.pathWindowDriver);
         }
         ChromeOptions options = new ChromeOptions();
-//        options.addArguments("--headless");
+        options.addArguments("--headless");
         options.addArguments("start-maximized");
         options.setExperimentalOption("excludeSwitches", Collections.singletonList("enable-automation"));
         options.setExperimentalOption("useAutomationExtension", false);
